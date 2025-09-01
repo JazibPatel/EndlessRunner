@@ -15,7 +15,8 @@ public class obstacleSpawn : MonoBehaviour
     public Transform centerLane;
 
     [Header("Spawn Settings")]
-    public float spawnDelay = 2f; // time (seconds) between spawns
+    //public float spawnDelay = 2f; // time (seconds) between spawns
+    private bool canSpawn = true;
 
     void Start()
     {
@@ -26,25 +27,43 @@ public class obstacleSpawn : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(spawnDelay);
-
-            // pick random obstacle type
-            int type = Random.Range(0, 3); // 0 = barrier, 1 = bollard, 2 = bump
-
-            if (type == 2) // speed bump → always center
+            if (canSpawn)
             {
-                Instantiate(speedBumpPrefab, centerLane.position, centerLane.rotation);
+                float spawnDelay = gameManager.Instance.increaseSpawn;
+                yield return new WaitForSeconds(spawnDelay);
+
+                // pick random obstacle type
+                int type = Random.Range(0, 3); // 0 = barrier, 1 = bollard, 2 = bump
+
+                if (type == 2) // speed bump → always center
+                {
+                    Instantiate(speedBumpPrefab, centerLane.position, centerLane.rotation);
+                }
+                else
+                {
+                    // barrier or bollard → random left or right
+                    Transform lane = (Random.value < 0.5f) ? leftLane : rightLane;
+
+                    if (type == 0)
+                        Instantiate(roadBarrierPrefab, lane.position, lane.rotation);
+                    else
+                        Instantiate(roadBollardPrefab, lane.position, lane.rotation);
+                }
+                yield return new WaitForSeconds(spawnDelay);
             }
             else
             {
-                // barrier or bollard → random left or right
-                Transform lane = (Random.value < 0.5f) ? leftLane : rightLane;
-
-                if (type == 0)
-                    Instantiate(roadBarrierPrefab, lane.position, lane.rotation);
-                else
-                    Instantiate(roadBollardPrefab, lane.position, lane.rotation);
+                yield return null;
             }
         }
+    }
+    public void PauseSpawning()
+    {
+        canSpawn = false;
+    }
+
+    public void ResumeSpawning()
+    {
+        canSpawn = true;
     }
 }

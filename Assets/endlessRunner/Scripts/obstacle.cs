@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class obstacle : MonoBehaviour
 {
-
-    public float obstacleSpeed;
+    public float obstacleYPosition;
     public float destroyZ = -20f;
 
 
     void Update()
     {
-
         // Move tree backward along world Z
         transform.Translate(Vector3.back * gameManager.Instance.obstacleSpeed * Time.deltaTime, Space.World);
+
+        // Lock Y so it never sinks
+        transform.position = new Vector3(transform.position.x, obstacleYPosition, transform.position.z);
 
         // Destroy when out of view
         if (transform.position.z <= destroyZ)
@@ -21,6 +22,7 @@ public class obstacle : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 }
 
 

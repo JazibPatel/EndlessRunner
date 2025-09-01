@@ -95,8 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3616ad6b981a3ed47ace0cd70af92232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obstacleYPosition: 17
   obstacleSpeed: 20
-  fixedY: 17.3
   destroyZ: -20
 --- !u!65 &978218321726189558
 BoxCollider:
