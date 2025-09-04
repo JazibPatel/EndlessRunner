@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class road : MonoBehaviour
 {
-    public float speed;
-
+    public PlayerManager owner;
     // Update is called once per frame
     void Update()
     {
@@ -14,7 +13,7 @@ public class road : MonoBehaviour
         Material mat = mr.material;
 
         Vector2 offset = mat.mainTextureOffset;
-        offset.y += gameManager.Instance.roadSpeed * Time.deltaTime;
+        offset.y += owner.roadSpeed * Time.deltaTime;
         mat.mainTextureOffset = offset;
 
     }

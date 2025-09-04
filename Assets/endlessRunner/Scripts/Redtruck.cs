@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Redtruck : MonoBehaviour
 {
@@ -15,32 +16,29 @@ public class Redtruck : MonoBehaviour
     public AudioClip ObsticalHitSound;
     private AudioSource audioSource;
 
-    [Header("Puse time on hit")]
+    [Header("Pause time on hit")]
     public float HoldTime;
 
+    // Swipe detection
+    private Vector2 startTouchPos;
+    private Vector2 endTouchPos;
+    private bool swipeDetected = false;
+
+    // Score
+    public int Score = 0;
+    public TextMeshProUGUI RedScore;
+
+    public PlayerManager owner;
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
+        
     }
 
     void Update()
     {
-        // Lane change input
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && currentLane > -1)
-        {
-            currentLane--;
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow) && currentLane < 1)
-        {
-            currentLane++;
-        }
-
-        // Jump input
-        if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded)
-        {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        }
+        DetectSwipe();
 
         // Smooth lane movement
         Vector3 targetPos = new Vector3(currentLane * laneDistance, rb.position.y, rb.position.z);
@@ -48,23 +46,90 @@ public class Redtruck : MonoBehaviour
         rb.MovePosition(newPos);
     }
 
-    IEnumerator KnockbackWorld()
+    void DetectSwipe()
     {
-        float originalRoad = gameManager.Instance.roadSpeed;
-        float originalObs = gameManager.Instance.obstacleSpeed;
-        float originalTree = gameManager.Instance.treespeed;
+        // Touch input (for mobile)
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
 
-        gameManager.Instance.roadSpeed = 0f;
-        gameManager.Instance.obstacleSpeed = -originalObs * 0.5f;
-        gameManager.Instance.treespeed = 0f;
+            // Only react to top half of screen
+            if (touch.position.y < Screen.height * 0.5f)
+            {
+                if (touch.phase == TouchPhase.Began)
+                {
+                    startTouchPos = touch.position;
+                    swipeDetected = true;
+                }
+                else if (touch.phase == TouchPhase.Ended && swipeDetected)
+                {
+                    endTouchPos = touch.position;
+                    HandleSwipe(endTouchPos - startTouchPos);
+                    swipeDetected = false;
+                }
+            }
+        }
 
-        yield return new WaitForSeconds(HoldTime);
-
-        gameManager.Instance.roadSpeed = originalRoad;
-        gameManager.Instance.obstacleSpeed = originalObs;
-        gameManager.Instance.treespeed = originalTree;
+        // Mouse input (for editor testing)
+        if (Input.GetMouseButtonDown(0) && Input.mousePosition.y < Screen.height * 0.5f)
+        {
+            startTouchPos = Input.mousePosition;
+            swipeDetected = true;
+        }
+        else if (Input.GetMouseButtonUp(0) && swipeDetected)
+        {
+            endTouchPos = (Vector2)Input.mousePosition;
+            HandleSwipe(endTouchPos - startTouchPos);
+            swipeDetected = false;
+        }
     }
 
+    void HandleSwipe(Vector2 swipeDelta)
+    {
+        if (swipeDelta.magnitude < 50f) return; // ignore small swipes
+
+        if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y))
+        {
+            // Horizontal swipe
+            if (swipeDelta.x < 0 && currentLane > -1)
+            {
+                currentLane--; // swipe left
+            }
+            else if (swipeDelta.x > 0 && currentLane < 1)
+            {
+                currentLane++; // swipe right
+            }
+        }
+        else
+        {
+            // Vertical swipe (up = jump)
+            if (swipeDelta.y > 0 && isGrounded)
+            {
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }
+        }
+    }
+
+
+    //IEnumerator KnockbackWorld()
+    //{
+    //    float originalRoad = gameManager.Instance.roadSpeed;
+    //    float originalObs = gameManager.Instance.barrierSpeed;
+    //    float originalTree = gameManager.Instance.treespeed;
+    //    float originalCheck = gameManager.Instance.checkPointSpeed;
+
+    //    gameManager.Instance.roadSpeed = 0f;
+    //    gameManager.Instance.barrierSpeed = -originalObs * 0.01f;
+    //    gameManager.Instance.treespeed = 0f;
+    //    gameManager.Instance.checkPointSpeed = 0f;
+
+    //    yield return new WaitForSeconds(HoldTime);
+
+    //    gameManager.Instance.roadSpeed = originalRoad;
+    //    gameManager.Instance.barrierSpeed = originalObs;
+    //    gameManager.Instance.treespeed = originalTree;
+    //    gameManager.Instance.checkPointSpeed = originalCheck;
+    //}
 
     void OnCollisionEnter(Collision collision)
     {
@@ -75,7 +140,15 @@ public class Redtruck : MonoBehaviour
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
             audioSource.PlayOneShot(ObsticalHitSound, 0.3f);
-            StartCoroutine(KnockbackWorld());
+            owner.StopForSeconds(HoldTime);
+            //StartCoroutine(KnockbackWorld());
+        }
+
+        if (collision.gameObject.CompareTag("CheckPoint"))
+        {
+            Score++;
+            RedScore.text = Score.ToString();
+            Debug.Log("RedScore = " + Score);
         }
     }
 
@@ -87,4 +160,3 @@ public class Redtruck : MonoBehaviour
         }
     }
 }
-

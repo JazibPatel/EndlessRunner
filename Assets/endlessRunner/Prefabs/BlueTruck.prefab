@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 0.18, y: 0.18, z: 0.18}
   m_Children: []
   m_Father: {fileID: 9038200867766610570}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &1908448941826521059
 MeshFilter:
@@ -129,13 +129,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908448943497226014}
-  m_LocalRotation: {x: -0.7309044, y: -0.08635358, z: 0.66947955, w: 0.100593686}
-  m_LocalPosition: {x: -0.174, y: 0.071, z: -0.207}
+  m_LocalRotation: {x: -0.7198003, y: -0.08468395, z: 0.68140477, w: 0.10199801}
+  m_LocalPosition: {x: -0.202, y: 0.075, z: -0.221}
   m_LocalScale: {x: 0.18, y: 0.18, z: 0.18}
   m_Children: []
   m_Father: {fileID: 9038200867766610570}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: -1.801, y: -94.784, z: 164.868}
+  m_LocalEulerAnglesHint: {x: -1.801, y: -92.9, z: 164.868}
 --- !u!33 &1908448943497226002
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -335,13 +335,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908448943911919123}
-  m_LocalRotation: {x: -0.7309044, y: -0.08635358, z: 0.66947955, w: 0.100593686}
-  m_LocalPosition: {x: -0.185, y: 0.073, z: 0.235}
+  m_LocalRotation: {x: -0.7096128, y: -0.08316152, z: 0.6920078, w: 0.103243046}
+  m_LocalPosition: {x: -0.364, y: 0.078, z: 0.23}
   m_LocalScale: {x: 0.18, y: 0.18, z: 0.18}
   m_Children: []
   m_Father: {fileID: 9038200867766610570}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -1.801, y: -94.784, z: 164.868}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: -1.801, y: -91.2, z: 164.868}
 --- !u!33 &1908448943911919127
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1055,7 +1055,6 @@ GameObject:
   - component: {fileID: 1908448942552159111}
   - component: {fileID: 1908448942552159104}
   - component: {fileID: 1908448942552159105}
-  - component: {fileID: 1908448942552159106}
   m_Layer: 0
   m_Name: BlueTruck
   m_TagString: Untagged
@@ -1203,23 +1202,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1908448942552159106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5872457922452274596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24200ad7ffefd7e429608e5788788d5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  laneDistance: 1
-  laneChangeSpeed: 10
-  jumpForce: 18
-  ObsticalHitSound: {fileID: 8300000, guid: 16517a49226a8774e946169756924ea3, type: 3}
-  HoldTime: 1
 --- !u!1 &6101770649402053836
 GameObject:
   m_ObjectHideFlags: 0
@@ -1451,8 +1433,8 @@ Transform:
   m_Children:
   - {fileID: 7235990810123078351}
   - {fileID: 9112466870793014349}
-  - {fileID: 1908448941826521070}
   - {fileID: 1908448943911919122}
+  - {fileID: 1908448941826521070}
   - {fileID: 1908448943698420414}
   - {fileID: 1908448943497226013}
   m_Father: {fileID: 6500094977572497182}
