@@ -210,6 +210,7 @@ MonoBehaviour:
   maxTreeSpeed: 70
   maxBarrierSpeed: 70
   maxCheckpointSpeed: 70
+  isStopped: 0
 --- !u!1001 &148213151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -295,15 +296,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2280167410418838165, guid: 3028e9edef244d648af9e8e5dc609fbb, type: 3}
       propertyPath: m_TagString
-      value: Obstacle2
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 2547564600746848647, guid: 3028e9edef244d648af9e8e5dc609fbb, type: 3}
       propertyPath: m_TagString
-      value: Obstacle2
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 3230281053915122558, guid: 3028e9edef244d648af9e8e5dc609fbb, type: 3}
       propertyPath: m_TagString
-      value: Obstacle2
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 4386637515008292822, guid: 3028e9edef244d648af9e8e5dc609fbb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -323,11 +324,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4416449304388346034, guid: 3028e9edef244d648af9e8e5dc609fbb, type: 3}
       propertyPath: m_TagString
-      value: Obstacle2
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 5755356063071155784, guid: 3028e9edef244d648af9e8e5dc609fbb, type: 3}
       propertyPath: m_TagString
-      value: Obstacle2
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 7814283452569834904, guid: 3028e9edef244d648af9e8e5dc609fbb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -603,7 +604,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -802,7 +803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6251666189375065463, guid: d4f40363aa44ea649ac792f348b8c36a, type: 3}
       propertyPath: m_TagString
-      value: Obstacle2
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 6740113937304721357, guid: d4f40363aa44ea649ac792f348b8c36a, type: 3}
       propertyPath: m_RootOrder
@@ -888,7 +889,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6251666189375065463, guid: d4f40363aa44ea649ac792f348b8c36a, type: 3}
       propertyPath: m_TagString
-      value: Obstacle2
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 6740113937304721357, guid: d4f40363aa44ea649ac792f348b8c36a, type: 3}
       propertyPath: m_RootOrder
@@ -1022,7 +1023,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -1140,6 +1141,7 @@ MonoBehaviour:
   maxTreeSpeed: 70
   maxBarrierSpeed: 70
   maxCheckpointSpeed: 70
+  isStopped: 0
 --- !u!4 &420379346
 Transform:
   m_ObjectHideFlags: 0
@@ -1299,7 +1301,8 @@ MonoBehaviour:
   minZ: -20
   checkpoint: 6
   c: {fileID: 553876358}
-  c2: {fileID: 783136067}
+  finishLineText: {fileID: 0}
+  isWaiting: 0
   owner: {fileID: 507196905}
 --- !u!1 &507196903
 GameObject:
@@ -1356,6 +1359,7 @@ MonoBehaviour:
   maxTreeSpeed: 70
   maxBarrierSpeed: 70
   maxCheckpointSpeed: 70
+  isStopped: 0
 --- !u!1001 &526872120
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1373,7 +1377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 174182, guid: f8c20c6b3f45c054da38d190b8c20b44, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 404776, guid: f8c20c6b3f45c054da38d190b8c20b44, type: 3}
       propertyPath: m_RootOrder
@@ -1464,7 +1468,10 @@ MonoBehaviour:
   resetZ: 40
   minZ: -20
   fixedY: -225.94
-  owner: {fileID: 0}
+  owner: {fileID: 507196905}
+  lanes: []
+  minSpacing: 0
+  maxSpacing: 0
 --- !u!1001 &553876354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1640,7 +1647,8 @@ MonoBehaviour:
   minZ: -20
   checkpoint: 6
   c: {fileID: 553876358}
-  c2: {fileID: 783136067}
+  finishLineText: {fileID: 0}
+  isWaiting: 0
   owner: {fileID: 507196905}
 --- !u!114 &553876358 stripped
 MonoBehaviour:
@@ -1703,7 +1711,8 @@ MonoBehaviour:
   minZ: -20
   checkpoint: 6
   c: {fileID: 1432881611}
-  c2: {fileID: 955100238}
+  finishLineText: {fileID: 0}
+  isWaiting: 0
   owner: {fileID: 21382436}
 --- !u!65 &589897396
 BoxCollider:
@@ -2282,7 +2291,8 @@ MonoBehaviour:
   minZ: -20
   checkpoint: 6
   c: {fileID: 783136067}
-  c2: {fileID: 783136067}
+  finishLineText: {fileID: 0}
+  isWaiting: 0
   owner: {fileID: 507196905}
 --- !u!1 &815143048
 GameObject:
@@ -2415,8 +2425,15 @@ MonoBehaviour:
   laneDistance: 1
   laneChangeSpeed: 10
   jumpForce: 18
+  isGrounded: 1
+  currentLane: 0
+  rb: {fileID: 0}
   ObsticalHitSound: {fileID: 8300000, guid: 16517a49226a8774e946169756924ea3, type: 3}
+  audioSource: {fileID: 0}
   HoldTime: 1
+  startTouchPos: {x: 0, y: 0}
+  endTouchPos: {x: 0, y: 0}
+  swipeDetected: 0
   Score: 0
   RedScore: {fileID: 408379688}
   owner: {fileID: 507196905}
@@ -2735,7 +2752,8 @@ MonoBehaviour:
   minZ: -20
   checkpoint: 6
   c: {fileID: 955100238}
-  c2: {fileID: 955100238}
+  finishLineText: {fileID: 0}
+  isWaiting: 0
   owner: {fileID: 21382436}
 --- !u!1 &1022598760
 GameObject:
@@ -2915,7 +2933,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1510087614134854271, guid: a10acadba451a9643bd9de2355620073, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1863282424476369456, guid: a10acadba451a9643bd9de2355620073, type: 3}
       propertyPath: m_TagString
@@ -2966,7 +2984,10 @@ MonoBehaviour:
   resetZ: 40
   minZ: -20
   fixedY: -225.94
-  owner: {fileID: 0}
+  owner: {fileID: 507196905}
+  lanes: []
+  minSpacing: 0
+  maxSpacing: 0
 --- !u!1 &1077061885
 GameObject:
   m_ObjectHideFlags: 0
@@ -3258,7 +3279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 820b69a9710bad348a01bcc21a475bf3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 820b69a9710bad348a01bcc21a475bf3, type: 3}
       propertyPath: m_TagString
@@ -3364,7 +3385,10 @@ MonoBehaviour:
   resetZ: 40
   minZ: -20
   fixedY: -225.94
-  owner: {fileID: 0}
+  owner: {fileID: 507196905}
+  lanes: []
+  minSpacing: 0
+  maxSpacing: 0
 --- !u!1 &1239819632
 GameObject:
   m_ObjectHideFlags: 0
@@ -3776,7 +3800,8 @@ MonoBehaviour:
   minZ: -20
   checkpoint: 6
   c: {fileID: 1432881611}
-  c2: {fileID: 955100238}
+  finishLineText: {fileID: 0}
+  isWaiting: 0
   owner: {fileID: 21382436}
 --- !u!1001 &1440179508
 PrefabInstance:
@@ -3885,7 +3910,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 106820, guid: 25475d0a94cb47348a7bcbc336364818, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 433212, guid: 25475d0a94cb47348a7bcbc336364818, type: 3}
       propertyPath: m_RootOrder
@@ -3976,7 +4001,10 @@ MonoBehaviour:
   resetZ: 40
   minZ: -20
   fixedY: -225.94
-  owner: {fileID: 0}
+  owner: {fileID: 507196905}
+  lanes: []
+  minSpacing: 0
+  maxSpacing: 0
 --- !u!1001 &1517223313
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4078,7 +4106,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1521431655
 Transform:
   m_ObjectHideFlags: 0
@@ -4300,7 +4328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8099398005186905532, guid: d5d94a87bf91ec842aeb8faa43a7ec9a, type: 3}
       propertyPath: m_TagString
-      value: Obstacle2
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 8875758405015052038, guid: d5d94a87bf91ec842aeb8faa43a7ec9a, type: 3}
       propertyPath: m_RootOrder
@@ -5460,8 +5488,15 @@ MonoBehaviour:
   laneDistance: 1
   laneChangeSpeed: 10
   jumpForce: 18
+  isGrounded: 1
+  currentLane: 0
+  rb: {fileID: 0}
   obstacleHitSound: {fileID: 8300000, guid: 16517a49226a8774e946169756924ea3, type: 3}
+  audioSource: {fileID: 0}
   HoldTime: 0
+  startTouchPos: {x: 0, y: 0}
+  endTouchPos: {x: 0, y: 0}
+  swipeDetected: 0
   Score: 0
   BlueScore: {fileID: 319101372}
   owner: {fileID: 21382436}
